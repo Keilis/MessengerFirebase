@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">MessengerFirebase</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="you_re_welcome">You\'re welcome!</string>
+    <string name="registration_title">Here\'s your first step with us!</string>
+    <string name="name">Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="your_age">Your age</string>
+    <string name="registration_name">Name</string>
+    <string name="registration_last_name">Last Name</string>
+    <string name="registration_age">Age</string>
+    <string name="register">Register</string>
+    <string name="background">background</string>
 </resources>
