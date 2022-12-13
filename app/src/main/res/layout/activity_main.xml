@@ -15,7 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.225"
-        app:srcCompat="@drawable/back" />
+        app:srcCompat="@drawable/back"
+        android:contentDescription="@string/background" />
 
     <TextView
         android:id="@+id/title"
@@ -38,12 +39,14 @@
         android:layout_margin="8dp"
         android:ems="10"
         android:hint="@string/email"
+        android:textColor="@color/white"
         android:inputType="textEmailAddress"
         android:padding="16dp"
         android:textColorHint="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/editTextNumberPassword"
@@ -52,12 +55,14 @@
         android:layout_margin="8dp"
         android:ems="10"
         android:hint="@string/password"
+        android:textColor="@color/white"
         android:inputType="numberPassword"
         android:padding="16dp"
         android:textColorHint="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
+        tools:ignore="Autofill" />
 
     <Button
         android:id="@+id/buttonSignUp"
@@ -111,7 +116,8 @@
         app:layout_constraintEnd_toEndOf="@+id/editTextTextEmailAddress"
         app:layout_constraintTop_toTopOf="@+id/editTextTextEmailAddress"
         app:layout_constraintVertical_bias="0.666"
-        app:srcCompat="@drawable/envelope" />
+        app:srcCompat="@drawable/envelope"
+        android:contentDescription="@string/image_view_for_login" />
 
     <ImageView
         android:layout_width="38dp"
@@ -119,7 +125,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/editTextNumberPassword"
         app:layout_constraintEnd_toEndOf="@+id/editTextNumberPassword"
         app:layout_constraintTop_toTopOf="@+id/editTextNumberPassword"
-        app:srcCompat="@drawable/lock" />
+        app:srcCompat="@drawable/lock"
+        android:contentDescription="@string/image_view_for_password" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

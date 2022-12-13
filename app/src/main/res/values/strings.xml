@@ -5,8 +5,8 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot Password?</string>
-    <string name="you_re_welcome">You\'re welcome!</string>
-    <string name="registration_title">Here\'s your first step with us!</string>
+    <string name="you_re_welcome">You are welcome!</string>
+    <string name="registration_title">Here is your first step with us!</string>
     <string name="name">Name</string>
     <string name="last_name">Last Name</string>
     <string name="your_age">Your age</string>
@@ -15,4 +15,8 @@
     <string name="registration_age">Age</string>
     <string name="register">Register</string>
     <string name="background">background</string>
+    <string name="image_view_for_login">Image View for login</string>
+    <string name="image_view_for_password">Image View for Password</string>
+    <string name="password_recovery">Password Recovery</string>
+    <string name="reset_password">Reset Password</string>
 </resources>
