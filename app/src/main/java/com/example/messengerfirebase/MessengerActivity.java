@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MessengerActivity extends AppCompatActivity {
-    private MainActivity mainActivity;
+    private LoginActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +19,7 @@ public class MessengerActivity extends AppCompatActivity {
     }
 
     static Intent newIntent(Context context) {
-        Intent intent = new Intent(context, MessengerActivity.class);
-        return intent;
+        return new Intent(context, MessengerActivity.class);
     }
 
     @Override
@@ -39,7 +38,7 @@ public class MessengerActivity extends AppCompatActivity {
     }
 
     private void launchMainActivity() {
-        Intent intent = MainActivity.newIntent(this);
+        Intent intent = LoginActivity.newIntent(this);
         startActivity(intent);
     }
 }

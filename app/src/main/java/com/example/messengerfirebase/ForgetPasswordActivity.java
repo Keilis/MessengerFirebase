@@ -18,7 +18,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
     private static final String EXTRA_Email = "email";
 
-    private MainActivity mainActivity;
+    private LoginActivity mainActivity;
     private EditText editTextTextEmailAddressResetPassword;
     private Button buttonResetPassword;
 

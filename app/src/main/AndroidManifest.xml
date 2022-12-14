@@ -25,7 +25,7 @@
             android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>

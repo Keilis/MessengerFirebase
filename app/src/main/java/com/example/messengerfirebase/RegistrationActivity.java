@@ -24,7 +24,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText editTextLastName;
     private EditText editTextAge;
     private Button buttonRegistration;
-    private MainActivity mainActivity;
+    private LoginActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
