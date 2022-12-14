@@ -2,6 +2,8 @@ package com.example.messengerfirebase;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +20,8 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
     private static final String EXTRA_Email = "email";
 
-    private LoginActivity mainActivity;
+    private ResetPasswordViewModel resetPasswordViewModel;
+
     private EditText editTextTextEmailAddressResetPassword;
     private Button buttonResetPassword;
 
@@ -27,24 +30,38 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
         initViews();
+
+        resetPasswordViewModel = new ViewModelProvider(this).get(ResetPasswordViewModel.class);
+
+        observeViewModel();
+
         String email = getIntent().getStringExtra(EXTRA_Email);
         editTextTextEmailAddressResetPassword.setText(email);
         buttonResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = editTextTextEmailAddressResetPassword.getText().toString().trim();
+                resetPasswordViewModel.resetPassword(email);
+            }
+        });
+    }
 
-                mainActivity.getAuth().sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        launchMessenger();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ForgetPasswordActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+    private void observeViewModel(){
+        resetPasswordViewModel.getError().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String errorMessage) {
+                if(errorMessage != null) {
+                    Toast.makeText(ForgetPasswordActivity.this, errorMessage,Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        resetPasswordViewModel.getSuccess().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean success) {
+                if (success){
+                    Toast.makeText(ForgetPasswordActivity.this, R.string.success_reset_email,Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

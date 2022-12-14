@@ -2,6 +2,8 @@ package com.example.messengerfirebase;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +16,9 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegistrationActivity extends AppCompatActivity {
-
 
     private EditText editTextTextEmailAddressRegistration;
     private EditText editTextTextPasswordRegistration;
@@ -24,13 +26,18 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText editTextLastName;
     private EditText editTextAge;
     private Button buttonRegistration;
-    private LoginActivity mainActivity;
+
+    private RegistrationViewModel registrationViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         initViews();
+
+        registrationViewModel = new ViewModelProvider(this).get(RegistrationViewModel.class);
+
+        observeViewModel();
 
         buttonRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,26 +48,37 @@ public class RegistrationActivity extends AppCompatActivity {
                 String lastName = editTextLastName.getText().toString().trim();
                 int age = Integer.parseInt(editTextAge.getText().toString().trim());
 
-                if (email.isEmpty() || password.isEmpty()) {
+                if (email.isEmpty() || password.isEmpty() || name.isEmpty() || lastName.isEmpty()) {
                     Toast.makeText(RegistrationActivity.this, "Заполнить нужно все поля", Toast.LENGTH_SHORT).show();
                 } else {
-                    mainActivity.getAuth().createUserWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            launchMessenger();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(RegistrationActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-            }
+                   registrationViewModel.signUp(email,password,name, lastName, age);
+                }
             }
         });
     }
 
-    private void launchMessenger(){
+    private void observeViewModel (){
+        registrationViewModel.getError().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String errorMessage) {
+                if(errorMessage != null){
+                    Toast.makeText(RegistrationActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        registrationViewModel.getUser().observe(this, new Observer<FirebaseUser>() {
+            @Override
+            public void onChanged(FirebaseUser firebaseUser) {
+              if (firebaseUser != null){
+                  launchMessenger();
+                  finish();
+              }
+            }
+        });
+    }
+
+    private void launchMessenger() {
         Intent intent = MessengerActivity.newIntent(this);
         startActivity(intent);
     }
