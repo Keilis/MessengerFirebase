@@ -46,9 +46,9 @@ public class RegistrationActivity extends AppCompatActivity {
                 String password = editTextTextPasswordRegistration.getText().toString().trim();
                 String name = editTextName.getText().toString().trim();
                 String lastName = editTextLastName.getText().toString().trim();
-                int age = Integer.parseInt(editTextAge.getText().toString().trim());
+                String age = editTextAge.getText().toString().trim();
 
-                if (email.isEmpty() || password.isEmpty() || name.isEmpty() || lastName.isEmpty()) {
+                if (email.isEmpty() || password.isEmpty() || name.isEmpty() || lastName.isEmpty() || age.isEmpty()) {
                     Toast.makeText(RegistrationActivity.this, "Заполнить нужно все поля", Toast.LENGTH_SHORT).show();
                 } else {
                    registrationViewModel.signUp(email,password,name, lastName, age);
@@ -71,15 +71,15 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
               if (firebaseUser != null){
-                  launchMessenger();
+                  launchMessenger(firebaseUser);
                   finish();
               }
             }
         });
     }
 
-    private void launchMessenger() {
-        Intent intent = MessengerActivity.newIntent(this);
+    private void launchMessenger(FirebaseUser firebaseUser) {
+        Intent intent = MessengerActivity.newIntent(this, firebaseUser.getUid());
         startActivity(intent);
     }
 

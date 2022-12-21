@@ -66,11 +66,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         });
     }
 
-    private void launchMessenger(){
-        Intent intent = MessengerActivity.newIntent(this);
-        startActivity(intent);
-    }
-
     static Intent newIntent(Context context, String email) {
         Intent intent = new Intent(context, ForgetPasswordActivity.class);
         intent.putExtra(EXTRA_Email, email);

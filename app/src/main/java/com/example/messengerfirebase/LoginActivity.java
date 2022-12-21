@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
                 if (firebaseUser != null) {
-                    launchMessenger();
+                    launchMessenger(firebaseUser);
                     //закрыть экран, чтобы пользователь не мог на него попасть после успешной авторизации
                     finish();
                 }
@@ -105,8 +105,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void launchMessenger() {
-        Intent intent = MessengerActivity.newIntent(this);
+    private void launchMessenger( FirebaseUser firebaseUser) {
+        Intent intent = MessengerActivity.newIntent(this, firebaseUser.getUid());
         startActivity(intent);
     }
 
