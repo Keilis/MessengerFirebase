@@ -10,7 +10,7 @@
     <color name="grey">#D6D5D5</color>
     <color name="mint">#4E769A</color>
     <color name="green">#90D8BB</color>
-    <color name="black_50">#50000000</color>
+    <color name="black_50">#80000000</color>
     <color name="red">#B31010</color>
     <color name="blue">#D2F1F5</color>
 </resources>
