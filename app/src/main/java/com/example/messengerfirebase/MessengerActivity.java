@@ -26,7 +26,6 @@ import java.util.Random;
 public class MessengerActivity extends AppCompatActivity {
     private MessengerViewModel messengerViewModel;
 
-    private RecyclerView recyclerViewUsers;
     private UsersAdapter usersAdapter;
 
     private static final String EXTRA_CURRENT_USER_ID = "current_id";
@@ -56,7 +55,7 @@ public class MessengerActivity extends AppCompatActivity {
     }
 
     private void initViews(){
-        recyclerViewUsers = findViewById(R.id.recyclerViewUsers);
+        RecyclerView recyclerViewUsers = findViewById(R.id.recyclerViewUsers);
         usersAdapter = new UsersAdapter();
         recyclerViewUsers.setAdapter(usersAdapter);
     }
@@ -97,6 +96,18 @@ public class MessengerActivity extends AppCompatActivity {
             messengerViewModel.signOut();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        messengerViewModel.setUserOnline(true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        messengerViewModel.setUserOnline(false);
     }
 
     private void launchLoginActivity() {

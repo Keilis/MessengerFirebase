@@ -75,7 +75,18 @@ public class MessengerViewModel extends ViewModel {
         });
     }
 
+    public void setUserOnline (boolean online) {
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+        if (firebaseUser == null) {
+            return;
+        } else {
+            usersReference.child(firebaseUser.getUid()).child("online").setValue(online);
+
+        }
+    }
+
     public void signOut() {
+        setUserOnline(false);
         auth.signOut();
     }
 }
